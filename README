@@ -4,3 +4,23 @@ minimal documentation for mu
 1. installing
    - run "sudo ant install"
    - you now have /usr/local/bin/mu
+
+2. using
+   - go to an empty directory
+   - make a file that looks like this:
+       org:  myorg.com
+       proj: NeatProj
+       ver:  1.0
+       lang: Java
+       type:
+           - app
+       uses:
+           - commons-*.jar
+       main: com.myorg.neat.Main
+   - put your sources in src/main/java
+   - put your resources in src/resources
+   - put your dependent jars in ~/.mu/lib
+   - run "mu app.run"
+
+3. the door, the future
+   - mu can do many other things, but they are not documented. todo.
