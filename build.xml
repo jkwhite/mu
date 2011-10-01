@@ -1,0 +1,37 @@
+<project name="mu" default="compile">
+    <property name="project" value="mu"/>
+    <property name="version" value="1.0"/>
+    <property name="target" value="${basedir}/target"/>
+    <property name="image" value="${target}/${project}-${version}"/>
+    <target name="compile" description="compile">
+        <mkdir dir="${image}"/>
+        <copy todir="${image}">
+            <fileset dir="${basedir}/src">
+                <include name="**/*"/>
+            </fileset>
+        </copy>
+        <tar destfile="${target}/${project}-${version}.tbz2" compression="bzip2">
+            <tarfileset dir="${target}">
+                <include name="${project}-${version}/lib/**/*"/>
+            </tarfileset>
+            <tarfileset dir="${target}" mode="755">
+                <include name="${project}-${version}/bin/*"/>
+            </tarfileset>
+        </tar>
+    </target>
+    <target name="install" description="install">
+        <mkdir dir="/usr/local/bin"/>
+        <mkdir dir="/usr/local/lib/mu"/>
+        <copy todir="/usr/local/bin">
+            <fileset dir="${basedir}/src/bin">
+                <include name="*"/>
+            </fileset>
+        </copy>
+        <chmod perm="755" file="/usr/local/bin/mu"/>
+        <copy todir="/usr/local">
+            <fileset dir="${basedir}/src">
+                <include name="lib/**/*"/>
+            </fileset>
+        </copy>
+    </target>
+</project>

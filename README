@@ -1,0 +1,6 @@
+minimal documentation for mu
+----------------------------
+
+1. installing
+   - run "sudo ant install"
+   - you now have /usr/local/bin/mu
