@@ -7,9 +7,10 @@ require 'fileutils'
 require 'Find'
 require 'net/http'
 require 'singleton'
-require 'webrick'
-require 'webrick'
-include WEBrick
+require 'tempfile'
+#require 'webrick'
+#require 'webrick'
+#include WEBrick
 #require 'Tempfile'
 require 'java'
 require 'platform'
@@ -258,15 +259,16 @@ class Mu<Repo
         last
     end
 
-    def server(t=nil)
-        s = HTTPServer.new(:Port=>8080)
-        trap("INT") { s.shutdown }
+    #def server(t=nil)
+        #s = HTTPServer.new(:Port=>8080)
+        #trap("INT") { s.shutdown }
         #s.mount('/build', HTTPServlet::FileHandler, "#{@dir}/target", true)
-        s.mount('/', Summary)
-        s.start
-    end
+        #s.mount('/', Summary)
+        #s.start
+    #end
 end
 
+=begin
 class Summary<HTTPServlet::AbstractServlet
     def do_GET(req, res)
         mu = load_mu '.'
@@ -344,6 +346,7 @@ class Command<HTTPServlet::AbstractServlet
     def do_GET(req, res)
     end
 end
+=end
 
 class World
     include Singleton
@@ -368,7 +371,7 @@ end
 
 def load_mu(dir)
     file=IO.read(dir+'/mu')
-    mu = YAML::load("--- !ruby/object:YAML::Mu\n#{file}")
+    mu = YAML::load("--- !ruby/object:Mu\n#{file}")
     mu.dir = dir
     mu
 end

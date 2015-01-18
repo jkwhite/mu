@@ -290,7 +290,7 @@ class Java_app<Java
                     export LD_LIBRARY_PATH=$base/lib:$LD_LIBRARY_PATH
                     export DYLD_LIBRARY_PATH=$base/lib:$DYLD_LIBRARY_PATH
                     '
-                boot="#{boot} [ \"`uname | grep Darwin`\" ] && dock=\"-Xdock:name=#{mu.proj.capitalize}\"
+                boot="#{boot} [ \"`uname | grep Darwin`\" ] && dock=\"-Xdock:name=#{mu.proj.capitalize} -Xdock:icon=#{mu.proj}.icns\"
                 "
                 #boot="#{boot} java #{mu.sysargs} -Dapp.root=`dirname $0`/.. -Dapple.laf.useScreenMenuBar=true -Djava.library.path=$base/lib $dock -cp $base/lib/#{cp.collect { |c| File.basename(c) }.join(':$base/lib/')} #{mu.main} $*
                 boot="#{boot} java #{mu.sysargs} -Dapp.root=`dirname $0`/.. -Dapple.laf.useScreenMenuBar=true -Djava.library.path=$base/lib $dock -cp `find $base/lib -name \*.jar | tr '\\n ' :` #{mu.main} $*
